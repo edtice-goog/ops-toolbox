@@ -1,0 +1,15 @@
+/* Stylesheet for render_conversation.py output converted by pandoc (--css conversation.css --embed-resources). */
+body { max-width: 52rem; margin: 2rem auto; padding: 0 1rem; font: 16px/1.55 "Segoe UI", system-ui, sans-serif; color: #1f2328; background: #fff; }
+header h1.title { font-size: 1.6rem; margin-bottom: .2rem; }
+header p.subtitle { color: #59636e; margin-top: 0; }
+h2 { font-size: 1.05rem; margin: 2.2rem 0 .6rem; padding: .35rem .6rem; border-radius: 6px; background: #ddf4ff; border-left: 4px solid #0969da; }
+h2[id^="claude"] { background: #f6f8fa; border-left: 4px solid #8250df; }
+h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+pre { background: #f6f8fa; border: 1px solid #d1d9e0; border-radius: 6px; padding: .7rem; overflow-x: auto; font-size: .82rem; line-height: 1.4; white-space: pre-wrap; word-break: break-word; }
+code { font-family: Consolas, "Cascadia Mono", monospace; font-size: .88em; }
+table { border-collapse: collapse; margin: .8rem 0; font-size: .9rem; }
+th, td { border: 1px solid #d1d9e0; padding: .35rem .6rem; vertical-align: top; text-align: left; }
+th { background: #f6f8fa; }
+div.work { color: #8c959f; font-size: .8rem; font-style: italic; margin: .3rem 0; }
+div.note { color: #59636e; font-size: .9rem; border-left: 3px solid #d1d9e0; padding-left: .7rem; margin: .5rem 0; }
+@media print { h2 { break-after: avoid; } pre { break-inside: avoid; } }
