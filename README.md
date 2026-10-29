@@ -58,6 +58,25 @@ pandoc conversation.md -t html5 --standalone --embed-resources --css conversatio
 pandoc conversation.md -t docx -o conversation.docx
 ```
 
+## teams-cache/ — when the Microsoft Teams desktop app won't send messages
+
+New Teams (Windows and macOS) sometimes stops sending: messages stuck on "Sending", a red "Failed to send", a channel
+that stops updating, while Teams on the web and on a phone work. Clearing the app's local cache usually fixes it, and
+Teams' own Quit often leaves its processes running, so they must be ended first.
+
+| Script | What it does | Changes anything? |
+|---|---|---|
+| `teams_cache.py check` | Is Teams installed and running, where its cache is, earlier backups | No |
+| `teams_cache.py clear [--stop] [--no-start]` | With Teams ended (`--stop` ends every Teams process, after you agree: an unsent draft can be lost), moves the cache into a backup folder beside it, then starts Teams again. Nothing is deleted; custom backgrounds stay | Moves the cache aside |
+
+```bash
+python -I teams_cache.py check
+python -I teams_cache.py clear --stop
+```
+
+Delete the backup folder yourself once a message goes through. Tests (fakes only, no Teams):
+`python teams-cache/test/test_teams_cache.py`. Python 3.8+, standard library only.
+
 ## License
 
 MIT, see `LICENSE`.
