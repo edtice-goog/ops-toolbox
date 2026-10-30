@@ -77,6 +77,30 @@ python -I teams_cache.py clear --stop
 Delete the backup folder yourself once a message goes through. Tests (fakes only, no Teams):
 `python teams-cache/test/test_teams_cache.py`. Python 3.8+, standard library only.
 
+## netrc-to-keeper/ — moving .netrc logins into a Keeper vault
+
+Keeper's importers don't read `.netrc` files. This converts them into Keeper's own CSV import format (its "Import
+Text File (.csv)" guide): one record per entry, no header row, columns Folder, Title, Login, Password, Website
+Address, Notes.
+
+| Script | What it does | Changes anything? |
+|---|---|---|
+| `netrc_to_keeper.py <files or folders> --list` | Each login found (file, machine, login, whether it has a password); never a password | No |
+| `netrc_to_keeper.py <files or folders> --out <file.csv> [--folder NAME]` | Writes the import file (new, never over an existing one without `--force`; owner-only on Linux and macOS) | Writes the CSV |
+
+```bash
+python -I netrc_to_keeper.py ~/keys --list
+python -I netrc_to_keeper.py ~/keys --out ~/keys/keeper-import.csv --folder netrc
+```
+
+A folder means its `*.netrc`, `.netrc` and `_netrc` files. A file with one entry gives its record the file's name as
+title (`git-server.netrc` becomes `git-server`); otherwise the title is the machine. Entries follow curl's and Python's
+netrc rules (quoted values, `#` comments, `macdef` blocks skipped, `default`); an error names the file and line, never
+a value. Import in Keeper's web vault: the account menu > Settings > Import > Import, "Text File (.csv, .xls, and
+.tsv)", and leave "file includes column headers" unchecked. Then delete the CSV, and, once the records are in Keeper,
+the netrc files: the script deletes nothing. Tests (fakes only): `python netrc-to-keeper/test/test_netrc_to_keeper.py`.
+Python 3.8+, standard library only.
+
 ## License
 
 MIT, see `LICENSE`.
